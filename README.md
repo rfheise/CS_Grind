@@ -1,5 +1,5 @@
-# A Collection Of the Different CS things I've Been Working On
-
+# My CS Practice Collection 😌
+This is a collection of all the practice projects and code that I have created.
 
 # Library
 A web app made in flask that allows users to search for and rate books.
