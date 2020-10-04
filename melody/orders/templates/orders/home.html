@@ -1,0 +1,31 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+<div class="container">
+  <div class = "mx-auto">
+  {% for food in foods %}
+  {% if forloop.counter0|divisibleby:2 %}
+  <div class="row justify-content-around">
+    <div class="col-md-3 col-centered">
+      <a {% if jimmy %} href = "{% url 'category' food.name %}" {% else %} href = "{% url 'foodie' food.name %}" {% endif %}>
+        <div>
+          <img class = "rounded-circle" src = "/static/orders/M.png" alt = "{{food.name}}" />
+        </div>
+        <span class = "icemountain">{{food.name}}</span></a>
+    </div>
+    {% else %}
+    <div class="col-md-3 col-centered">
+      <a {% if jimmy %} href = "{% url 'category' food.name %}" {% else %} href = "{% url 'foodie' food.name %}" {% endif %} >
+        <div>
+          <img class = "rounded-circle" src = "/static/orders/M.png" alt = "{{food.name}}" />
+        </div>
+        <span class = "icemountain">{{food.name}}</span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+</div>
+{% endblock %}

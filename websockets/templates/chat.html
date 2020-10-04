@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block titl %}{{title}}{% endblock%}
+
+{% block script %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    localStorage.setItem("url", `${document.URL}`);
+});
+</script>
+
+{% endblock %}
+
+{% block main %}
+<p>Join A Room Or Create Your Own <a href = "/create">Here</a></p>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Chats</th>
+    </tr>
+  </thead>
+<tbody id = "table">
+{% for chat in chats %}
+<tr>
+  <td  style = "color: {{chat['color']}};"><p style = "font-size:small;">{{chat["timestamp"]}}  - {{chat["name"]}}</p>
+    <p>{{chat["message"]}}</p>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<form id = "form">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Chats" id = "chat">
+    </div>
+  </div>
+  <button type = "submit" class = "btn btn-success" id = "submit">Submit</button>
+</form>
+<form id = "input">
+  </form>
+{% endblock %}

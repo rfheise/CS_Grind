@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Registered{% endblock %}
+
+{% block thanos %}
+
+{% if session.user_id %}
+<div class = "text">
+    Success, You Have Been Registered
+</div>
+{% else %}
+<div class = "text" style ="color:red";>
+    Failure, You Have Not Been Registered
+</div>
+{% endif %}
+
+<a href = "/">Return Home</a>
+
+{% endblock %}

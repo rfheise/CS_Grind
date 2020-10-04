@@ -1,0 +1,51 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}Cart{% endblock %}
+{% block body %}
+<div class="container">
+  <div class = "mx-auto">
+  <div class="row justify-content-around">
+    <div class="col-md-6 col-centered">
+    {% if chess %}
+      <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Item</th>
+      <th scope="col">Price</th>
+      <th scope = "col"></th>
+    </tr>
+  </thead>
+  <tbody  class = "icemountain">
+    {% for item in chess %}
+    <tr>
+      <td>{{item.food}}</td>
+      <td>${{item.price}}</td>
+      <td>
+        <form action = "{% url "delete" %}" method = "post">
+          {% csrf_token %}
+          <input type = "hidden" name = "fruitbythefoot" value = "{{item.delete}}" />
+          <button class = "btn btn-warning" type = "submit">Remove Item</button>
+          </form>
+      </td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td>Total</td>
+      <td>${{total}}</td>
+    </tr>
+  </tbody>
+</table>
+<form href = {% url "checkout" %} method = "POST">
+  {% csrf_token %}
+  <button type = submit class = "btn btn-warning">Checkout</button>
+  </form>
+  {% else %}
+  <p class = "icemountain">No Items In Cart</p>
+  {% endif %}
+
+
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

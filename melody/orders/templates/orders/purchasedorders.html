@@ -1,0 +1,31 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}Cart{% endblock %}
+{% block body %}
+<div class="container">
+  <div class = "mx-auto">
+  <div class="row justify-content-around">
+    <div class="col-md-6 col-centered">
+      <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Order</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody  class = "icemountain">
+    {% for order in orders %}
+    <tr>
+      <td><a href = {% url "orderup" order.id %}><span class = "icemountain">{{order}}</span></a></td>
+      <td>{{order.date}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

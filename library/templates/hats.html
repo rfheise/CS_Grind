@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}{{bats.title}}{% endblock %}
+
+{% block thanos %}
+<div style = "color:white;">
+<p>book isbn: {{bats.ibsn}}</p>
+<p>book title: {{bats.title}}</p>
+<p>book author: {{bats.author}}</p>
+<p>book release year: {{bats.year}}</p>
+<p>Average Rating out of 5: {{good["avg"]}}</p>
+<p>Number of Reviews: {{good["ratings"]}}</p>
+</div>
+{% if session.user_id %}
+<p>Submit your own Review:</p>
+<form action = "/search/{{book_id}}" method = "POST">
+  <div>
+    <div class = "form-group" >
+      <label>Rating:</label>
+    <select name = "rating">
+      <option value = "5">5</option>
+      <option value = "4">4</option>
+      <option value = "3">3</option>
+      <option value = "2">2</option>
+      <option value = "1">1</option>
+    </select>
+    </div>
+  <div class="form-group">
+    <div  class ="col-sm-2-md-4">
+    <label >Review:</label>
+    <input type="text" class="form-control" name = "review" placeholder="Review">
+  </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+{%else%}
+<h3 class = "text" style ="color:red;">In Order To Leave A Review You Must be Logged In !!!</h3>
+{% endif %}
+{% if hats %}
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Review</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for hat in hats %}
+    <tr>
+      <td>{{hat.username}}</td>
+      <td>{{hat.rating}}</td>
+      <td>{{hat.review}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h1 class = "text" style ="color:white;">Sorry, No Reviews Found</h1>
+{% endif %}
+
+{% endblock %}

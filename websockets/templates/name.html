@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block titl %}{{title}}{% endblock%}
+
+{% block main %}
+<div id = "success"></div>
+<form action = "/login", method = "POST"  id = "input">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Username" name = "name" id = "text" data-type = "Username">
+    </div>
+  </div>
+  <button type = "submit" class = "btn btn-success">Submit</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block titl %}{{title}}{% endblock%}
+
+{% block script %}
+
+
+{% endblock %}
+
+{% block main %}
+<div id = "success"></div>
+<form action = "/create", method = "POST"  id = "input">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Room Name" name = "room" id = "text" data-type = "Room Name">
+    </div>
+  </div>
+  <button type = "submit" class = "btn btn-success">Submit</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+<div class="container">
+  <div class = "mx-auto">
+  <div class="row justify-content-around">
+    <div class="col col-centered">
+      <div>
+          <img class = "switch" src = "/static/orders/M.png" alt = "{{food.name}}" />
+        </div>
+        <span class = "icemountain" style = "font-size: large;">{{food.name}}</span>
+        <p class = "icemountain" style = "font-size: large;">Price: ${{food.usd}}</p>
+    </div>
+    <div class="col-md-3  align-self-center">
+      {% if xbox or switch %}
+      <span class = "icemountain" style = "font-size: large;">Please Select One:</span>
+      {% endif %}
+      <div>
+      <form action = {% url "cart"%} method = "post">
+        {% csrf_token %}
+        {% if xbox %}
+        <div>
+        <select name = "food1">
+          {%for attribute in attributes %}
+          {% if not attribute.many %}
+          <option value ="{{attribute}}">{{attribute}}{% if attribute.price != 0 and attribute.price %}-An Extra ${{attribute.usd}}{% endif %}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+        <div>
+        {% endif %}
+        {% if switch %}
+        {%for attribute in attributes %}
+        {% if attribute.many %}
+        <input type = "checkbox" value = "{{attribute}}" name ="food2" ><span class = "icemountain">{{attribute}}{% if attribute.price != 0 and attribute.price %}-${{attribute.usd}}{% endif %}</span><br >
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <input type = "hidden" value = "{{food.name}}"  name = "food3" />
+        <button type = "submit" class = "btn btn-warning">Add To Cart</button>
+        </form>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

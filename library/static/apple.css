@@ -1,0 +1,24 @@
+.text{
+
+  color:#17C117;
+  text-align: center;
+}
+.row > div {
+    padding: 20px;
+    background-color: teal;
+    border: 2px solid black;
+}
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+.radio1 + label::before {
+    width: 0.5em;
+    height: 0.5em;
+}
+.glass{
+
+  color:#a7c4f2;
+  text-align: center;
+}

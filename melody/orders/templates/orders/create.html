@@ -1,0 +1,44 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+<div class="container">
+  <div class = "mx-auto">
+  <div class="row justify-content-around">
+    <div class="col-md-6 col-centered">
+      <form action = {%if gillyweed %}"/user/create"{% else %}"/user/login"{% endif %}" method = "POST">
+            {% csrf_token %}
+          {%if gillyweed %}
+  <div class="form-group">
+    <input type="email" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <input type="text" name = "fname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Name">
+  </div>
+  <div class="form-group">
+    <input type="text" name = "lname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Last Name">
+  </div>
+  {% endif %}
+  <div class="form-group">
+    <input type="text" name = "username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="username">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" name = "password" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  {%if gillyweed %}
+  <div class="form-group">
+    <input type="password" class="form-control" name = "cpassword" id="exampleInputPassword1" placeholder="Confirm Password">
+  </div>
+  {% endif %}
+  <button type="submit" class="btn btn-warning">{% if gillyweed %}Register{% else %}Login{% endif %}</button>
+</form>
+{% if not gillyweed %}
+<div class ="icemountain">OR</div> <div><a href = "/user/create"><button class = "btn btn-warning">Register</button></a></div>
+{% endif %}
+<div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
