@@ -1,76 +1,52 @@
 #include "fraction.h"
 #include <iostream>
 
-using std::cout;
-using std::endl;
-using std::swap;
 
-void printer(const char * x){
-  cout << x << endl;
-}
+using namespace std;
+
 
 Fraction::Fraction(int num, int den)
-  :num(num), den(den){
-    printer("Standard Constuctor Called");
-
+:den(den),num(num)
+{
+  cout << "Standard Constructor Called" << endl;
 }
-Fraction::Fraction(){
-  printer("Empty Constuctor called");
+void swap(Fraction &frac, Fraction &fractwo){
+  swap(frac.num,fractwo.num);
+  swap(frac.den,fractwo.den);
 }
-
-Fraction::Fraction(Fraction & source)
-  :num(source.num),den(source.den){
-    printer("Copy Constructor Called");
-}
-
-Fraction::Fraction(Fraction && source)
-  :num(source.num),den(source.den){
-    printer("Move Constructor Called");
-}
-
-Fraction & Fraction::operator=(Fraction &frac){
-  printer("Copy Assignment Operator Called");
-  //checks to see if self assignment
-  if(&frac == this){
-    //if so return reference to itself
-    return *this;
-  }
-  this -> num = frac.num;
-  this -> den = frac.den;
-  return *this;
-
-}
-// Fraction & Fraction::operator+(Fraction &frac){
-//   int den = this -> den * frac.den;
-//   int num = this -> num * frac.den + frac.num * this -> den;
-//   Fraction x = Fraction(num,den);
-//   return x;
-//
-// }
-Fraction Fraction::operator+(Fraction &frac){
-  printer("Additon Operator Called");
-  Fraction juice;
-  juice.den = this -> den * frac.den;
-  juice.num = this -> num * frac.den + frac.num * this -> den;
-  cout << "Juice Num: " << juice.num;
-  cout << " Juice Den: " << juice.den << endl;
-  return juice;
-
-}
-
 
 Fraction::~Fraction(){
-  printer("Destructor Called For Fraction");
+  cout << "Deconstructor Called " << endl;
 }
+// without copy swap idiom
+// Fraction & Fraction::operator=(Fraction & frac){
+//   if(this == &frac){
+//     return *this;
+//   }
+//   cout << "Copy Assignment operator called Without Copy Swap Idiom" << endl;
+//   this -> den = frac.den;
+//   this -> num = frac.num;
+//   return *this;
+// }
 
-Fraction & Fraction::operator=(Fraction &&frac){
-    printer("Move Assignment Operator Called");
-    if(&frac == this){
-      //if so return reference to itself
-      return *this;
-    }
-    this -> num = frac.num;
-    this -> den = frac.den;
-    return *this;
+//r-value move assignment operator overload
+//computationally expensive to make a copy
+// Fraction & Fraction::operator=(Fraction && frac){
+//     cout << "Swap called with Move Assignment operator" << endl;
+//     swap(*this,frac);
+//     return *this;
+// }
 
+//with copy swap idiom
+//reuses copy constructors code at minimal computational cost
+Fraction & Fraction::operator=(Fraction frac){
+   cout << "Copy Assignment operator called With Copy Swap Idiom" << endl;
+   // Fraction temp = frac;
+  //don't check if they are equal since self assignment is rare and computationally expensive
+  swap(*this,frac);
+  return *this;
+}
+Fraction::Fraction(Fraction &source)
+:Fraction(source.den,source.num){
+  cout << "Copy Constructor called" << endl;
 }
