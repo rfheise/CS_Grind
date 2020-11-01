@@ -24,7 +24,7 @@ Strang::~Strang(){
     cout << "Deconstructor Called" << endl;
     delete[] str;
 }
-char * Strang::getStrang() {
+char * Strang::getStrang() const {
     return str;
 }
 //with copy swap idiom
@@ -61,6 +61,33 @@ Strang::Strang(Strang &source) {
         str[i] = source.str[i];
     }
     str[length] = '\0';
+}
+std::istream & operator>>(std::istream &is, Strang & x) {
+    char *buff = new char[1000];
+    is >> buff;
+    delete[] x.str;
+    x.str = buff;
+    return is;
+}
+std::ostream & operator<<(std::ostream &os, const Strang& x) {
+    os << x.getStrang();
+    return os;
+}
+Strang operator+(const Strang& one, const Strang& two) {
+    cout << "Overloaded Global Concatintation function called" << endl;
+    Strang x = Strang();
+    delete[] x.str;
+    char *buff = new char[strlen(one.str)+strlen(two.str)+1];
+    int lenone = strlen(one.str);
+    for (int i = 0; i < lenone; i++) {
+        buff[i] = one.str[i];
+    }
+    for (int i = 0,len = strlen(two.str); i < len; i++) {
+        buff[lenone + i] = two.str[i];
+    }
+    buff[lenone+strlen(two.str)] = '\0';
+    x.str = buff;
+    return x;
 }
 Strang::Strang(Strang &&source) {
     cout << "Move Constructor Called" << endl;
