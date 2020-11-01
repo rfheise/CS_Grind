@@ -2,6 +2,7 @@
 using std::ostream;
 class Strang {
     friend ostream & operator<<(ostream &os,const Strang& x);
+    friend int main(void);
     public:
         Strang();
         ~Strang();
@@ -10,10 +11,12 @@ class Strang {
         Strang(Strang &&source);
         Strang & operator=(Strang other);
         Strang operator-();
-        void operator*=(int am);
+        Strang & operator*=(int am);
         Strang operator*(int am);
-        void operator+=(Strang &other) ;
-        Strang operator+(Strang &other);
+        Strang& operator+=(const Strang &other);
+        Strang operator++(int);
+        Strang& operator++();
+        Strang operator+(const Strang &other);
         bool operator>(Strang &other) ;
         bool operator<(Strang &other);
         bool operator!=(Strang &other);

@@ -14,7 +14,9 @@ Strang::Strang(Strang& source) {
     strcpy(str,source.str);
 }
 Strang & Strang::operator=(Strang other) {
-    std::swap(str,other.str);
+    char *temp = other.str;
+    other.str = str;
+    str = temp;
     return *this;
 }
 Strang::Strang(Strang && source) {
@@ -37,7 +39,7 @@ Strang::~Strang() {
     else {
         temp = str;
     }
-    cout << str << endl;
+    cout <<str << endl;
     delete[] str;
 }
 ostream & operator<<(ostream &os,const Strang &x) {
@@ -67,7 +69,7 @@ bool Strang::operator<(Strang &other) {
 bool Strang::operator>(Strang &other) {
     return strcmp(str,other.str) > 0;
 }
-Strang Strang::operator+(Strang &other) {
+Strang Strang::operator+(const Strang &other) {
     int lenone = strlen(str);
     int lentwo = strlen(other.str);
     Strang y = Strang();
@@ -82,16 +84,18 @@ Strang Strang::operator+(Strang &other) {
     y.str = buff;
     return y;
 }
-void Strang::operator+=(Strang& other){
+Strang & Strang::operator+=(const Strang& other){
     *this = (*this + other);
+    return *this;
 }
 Strang Strang::operator*(int am) {
+    cout << "Function called" << endl;
     Strang y = Strang();
     delete[] y.str;
     char * buff = new char[strlen(str) * am + 1];
     for (int i = 0; i < am; i++) {
         for (int j = 0,len = strlen(str); j < len; j++) {
-            buff[j+i*len] = str[i];
+            buff[j+i*len] = str[j];
         }
     }
     buff[strlen(str) * am] = '\0';
@@ -99,6 +103,16 @@ Strang Strang::operator*(int am) {
     return y;
 
 }
-void Strang::operator*=(int am) {
+Strang& Strang::operator++() {
+    *(this) *= 2;
+    return *this;
+}
+Strang Strang::operator++(int) {
+    Strang epic = *this;
+    operator++();
+    return epic;
+}
+Strang & Strang::operator*=(int am) {
     *this = (*this * am);
+    return *this;
 }
