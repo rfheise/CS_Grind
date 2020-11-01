@@ -1,0 +1,10 @@
+Standard Constructor Called
+Copy Constructor Called
+Start
+Standard Constructor Called
+Move Constructor Called
+Destructor Called
+End
+Destructor Called
+Destructor Called
+Destructor Called

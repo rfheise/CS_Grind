@@ -5,7 +5,8 @@ class Fraction{
   public:
     Fraction(int num,int den);
     ~Fraction();
-    Fraction(Fraction &source);
+    Fraction(const Fraction &source);
+    Fraction(Fraction && source);
     //without idiom
     // Fraction & operator=(Fraction & frac);
     //with idiom added & to differentiate between l and r values

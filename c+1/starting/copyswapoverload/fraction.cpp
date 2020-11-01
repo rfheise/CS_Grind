@@ -36,17 +36,28 @@ Fraction::~Fraction(){
 //     swap(*this,frac);
 //     return *this;
 // }
-
+Fraction::Fraction(Fraction && frac)
+    :Fraction(frac.den,frac.num){
+        cout << "Calls R-value Copy Constructor" << endl;
+}
 //with copy swap idiom
 //reuses copy constructors code at minimal computational cost
 Fraction & Fraction::operator=(Fraction frac){
    cout << "Copy Assignment operator called With Copy Swap Idiom" << endl;
    // Fraction temp = frac;
   //don't check if they are equal since self assignment is rare and computationally expensive
+  // Fraction temp = frac;
   swap(*this,frac);
   return *this;
 }
-Fraction::Fraction(Fraction &source)
+// Fraction & Fraction::operator=(Fraction && frac){
+//    cout << "Copy Assignment operator called With Copy Swap Idiom" << endl;
+//    // Fraction temp = frac;
+//   //don't check if they are equal since self assignment is rare and computationally expensive
+//   swap(*this,frac);
+//   return *this;
+// }
+Fraction::Fraction(const Fraction &source)
 :Fraction(source.den,source.num){
   cout << "Copy Constructor called" << endl;
 }
