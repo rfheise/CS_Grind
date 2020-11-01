@@ -4,6 +4,7 @@
 using namespace std;
 int main(void) {
     Strang x = Strang("F");
-    x *= 5;
-    cout << (-x)<< endl;
+    x++;
+    int i = 0;
+    cout << ++i << endl;
 }

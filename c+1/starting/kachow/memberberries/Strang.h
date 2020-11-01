@@ -2,7 +2,6 @@
 using std::ostream;
 class Strang {
     friend ostream & operator<<(ostream &os,const Strang& x);
-    friend int main(void);
     public:
         Strang();
         ~Strang();
