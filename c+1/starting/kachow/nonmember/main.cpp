@@ -4,7 +4,7 @@
 using namespace std;
 int main(void) {
     Strang x = Strang("F");
-    x++;
+    x+= "A";
     int i = 0;
-    cout << ++i << endl;
+    cout << ("bruh" + x) << endl;
 }
