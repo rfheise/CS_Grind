@@ -1,6 +1,10 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 #include <memory>
+
+#include <iostream>
+using namespace std;
+
 using std::unique_ptr;
 using std::shared_ptr;
 template <typename T>
@@ -31,8 +35,13 @@ public:
     void setNext(Node<T> * next) {
         this -> next = next;
     }
-    ~Node() {
-        delete next;
+    void deleter() {
+        if (next) {
+            next -> deleter();
+        }
+        delete this;
+        return;
+
     }
 private:
     Node<T> *next;

@@ -16,10 +16,10 @@ public:
     T& get() {
         return obj;
     }
-    shared_ptr<Node<T>> getNext() {
+    shared_ptr<Node<T>>& getNext() {
         return next;
     }
-    bool equals(shared_ptr<Node<T>> other) {
+    bool equals(shared_ptr<Node<T>>& other) {
         return equals(*other);
     }
     bool equals(Node& other) {
@@ -28,7 +28,7 @@ public:
     bool equals(T& other) {
         return other == obj;
     }
-    void setNext(shared_ptr<Node<T>> next) {
+    void setNext(shared_ptr<Node<T>>& next) {
         this -> next = next;
     }
 private:

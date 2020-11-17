@@ -1,12 +1,12 @@
 from Node import Node
 
 def main():
-    x = Hash(hash)
+    x = Hash(hash, 10000)
     for i in range(1000000):
         x.add(i)
     for i in range(1000000):
         x.check(i)
-    for i in range(1000000):
+    for i in range(500000):
         x.remove(i)
     print("Done")
 

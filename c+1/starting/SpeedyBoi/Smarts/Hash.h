@@ -8,7 +8,7 @@ using std::shared_ptr;
 template <typename T>
 class Hash {
 public:
-    static constexpr int default_size = 1000000;
+    static constexpr int default_size = 10000;
     Hash(int (*func)(T obj), int len = default_size)
         :func(func), size(0), len(len){
             nodes = make_unique<shared_ptr<Node<T>>[]>(len);
@@ -53,6 +53,7 @@ public:
                 size --;
                 return;
             }
+            temp = temp -> getNext();
         }
 
     }

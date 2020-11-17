@@ -1,10 +1,12 @@
 #ifndef _HASH_H_
 #define _HASH_H_
 #include "Node.h"
+
+
 template <typename T>
 class Hash {
 public:
-    static constexpr int default_size = 1000000;
+    static constexpr int default_size = 10000;
     Hash(int (*func)(T obj), int len = default_size)
         :func(func), size(0), len(len){
             nodes = new Node<T>*[len];
@@ -19,7 +21,6 @@ public:
         nodes[hash] = new Node(obj, nodes[hash]);
         size++;
     }
-
     bool check(T obj) {
         size_t hash = func(obj);
         Node<T> * temp = nodes[hash % len];
@@ -38,17 +39,22 @@ public:
             return;
         }
         if (nodes[hash] -> equals(obj)) {
+            tmp = nodes[hash];
             nodes[hash] = nodes[hash] -> getNext();
+            delete tmp;
             size --;
             return;
         }
         Node<T> * temp = nodes[hash];
         while(temp -> getNext()) {
             if (temp -> getNext() -> equals(obj)) {
-                temp -> setNext(temp -> getNext() -> getNext());
+                tmp = temp -> getNext();
+                temp -> setNext(tmp -> getNext());
+                delete tmp;
                 size --;
                 return;
             }
+            temp = temp -> getNext();
         }
 
     }
@@ -56,10 +62,16 @@ public:
         return size;
     }
     ~Hash() {
-        delete[] nodes;
+        for (int i = 0; i < len; i++) {
+            if (nodes[i] != nullptr) {
+                nodes[i] -> deleter();
+            }
+        }
+        delete nodes;
     }
 
 private:
+    Node<T> *tmp;
     Node<T> **nodes;
     int (*func)(T obj);
     int size;

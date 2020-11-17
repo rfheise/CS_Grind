@@ -4,15 +4,18 @@ class Hash<T>{
     private int size;
 
     public static void main(String[] args) {
-        Hash<Integer> x = new Hash<Integer>(1000000);
-        for(int i = 0; i < 1000000; i++) {
-            x.add(i);
+        Hash<Integer> epicness = new Hash<Integer>(10000);
+        int x = 1000000;
+        for (int i = 0; i < x; i++) {
+            epicness.add(i);
         }
-        for (int i = 0; i < 1000000; i ++) {
-            x.check((Integer)i);
+        // cout << "not noice" << endl;
+        for (int i = 0; i < x; i++) {
+            epicness.check(i);
+            // cout << "fin" << endl;
         }
-        for(int i = 0; i < 1000000; i++){
-            x.remove((Integer)i);
+        for (int i = 0,l = x/2; i < l; i++) {
+            epicness.remove(i);
         }
         System.out.println("Done");
     }

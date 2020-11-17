@@ -16,15 +16,18 @@ int main(void) {
     Hash<int> epicness = Hash<int>([](int i) -> int {
         return i;
     });
-    for (int i = 0; i < 1000000; i++) {
+    int x = 1000000;
+    for (int i = 0; i < x; i++) {
         epicness.add(i);
     }
-    // for (int i = 0; i < 1000000; i++) {
-    //     epicness.check(i);
-    // }
-    // for (int i = 0; i < 1000000; i++) {
-    //     epicness.remove(i);
-    // }
+    // cout << "not noice" << endl;
+    for (int i = 0; i < x; i++) {
+        epicness.check(i);
+        // cout << "fin" << endl;
+    }
+    for (int i = 0,l = x/2; i < l; i++) {
+        epicness.remove(i);
+    }
     cout << "Done" << endl;
 
 }
