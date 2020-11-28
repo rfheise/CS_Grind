@@ -27,10 +27,11 @@ public:
     
     //add object to hash table
     bool add(T &&obj) {
-        add(obj);
+        return add(obj);
     }
     bool add(T &obj) {
-        size_t code = hash(obj) % arrsize;
+        size_t code = hash(obj);
+        code %= arrsize;
         Node<T> *n = new Node<T>(obj, nodes[code]);
         nodes[code] = n;
         size ++;
@@ -41,7 +42,8 @@ public:
         return check(obj);
     }
     bool check(T& obj) {
-        size_t code = hash(obj) % arrsize;
+        size_t code = hash(obj);
+        code %= arrsize;
         Node<T> *temp = nodes[code];
         while (temp) {
             if (*temp == obj) {
@@ -56,7 +58,8 @@ public:
         return remove(obj);
     }
     bool remove(T &obj) {
-        size_t code = hash(obj) % arrsize;
+        size_t code = hash(obj);
+        code %= arrsize;
         Node<T> *temp = nodes[code];
         Node<T> *tmp;
         while (temp && (tmp = temp -> getNext())) {

@@ -10,10 +10,11 @@ Hash<string> * load(string filename);
 //Uses Hash function djb2 by Dan Bernstein http://www.cse.yorku.ca/~oz/hash.html
 int hashfunction(string words){
     unsigned long hash = 5381;
-    int c;
-    const char *word = words.c_str();
-    while ((c = *word++))
-        hash = ((hash << 5) + hash) + tolower(c); /* hash * 33 + c */
+    for (char c: words) {
+        hash = 33 * hash + tolower(c);
+    }
+    // while ((c = *word++))
+    //     hash = ((hash << 5) + hash) + tolower(c); /* hash * 33 + c */
     return hash;
 }
 class FileNotFoundError {
@@ -31,6 +32,11 @@ int main(void) {
     for (int i = 0; i < 30; i++) {
         threads[i].join();
     }
+    // long total = 0;
+    // for (int i = 0; i < 30; i++) {
+    //     total += check(dict, "./texts/" + lists[i]);
+    // }
+    // cout << "Total " << total << endl;
     delete dict;
  }
 
