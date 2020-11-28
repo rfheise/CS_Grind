@@ -1,0 +1,14 @@
+{
+    "workbench.preferredLightColorTheme": "Visual Studio Dark",
+    "workbench.preferredDarkColorTheme": "Visual Studio Dark",
+    "workbench.preferredHighContrastColorTheme": "Visual Studio Dark",
+    "editor.fontSize": 14,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#0078d7",
+        "activityBar.foreground": "#ffffff",
+        
+    },
+    "files.associations": {
+        "iosfwd": "cpp"
+    }
+}

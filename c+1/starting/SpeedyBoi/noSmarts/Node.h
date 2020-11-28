@@ -1,17 +1,15 @@
 #ifndef _NODE_H_
 #define _NODE_H_
-#include <memory>
 
 #include <iostream>
 using namespace std;
 
-using std::unique_ptr;
-using std::shared_ptr;
+
 template <typename T>
 class Node {
 public:
     Node(T obj, Node<T>* next)
-        :obj(obj),next(next) {
+        :next(next), obj(obj) {
 
     }
     Node(T obj)

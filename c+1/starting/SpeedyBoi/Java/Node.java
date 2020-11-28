@@ -2,7 +2,7 @@
 class Node<T>{
     private Node next;
     private T obj;
-
+    
     public Node(T obj, Node next){
         this.obj = obj;
         this.next = next;

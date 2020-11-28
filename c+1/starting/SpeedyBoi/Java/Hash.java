@@ -19,7 +19,6 @@ class Hash<T>{
         }
         System.out.println("Done");
     }
-
     public Hash(int len){
         nodes = new Node[len];
         size = 0;

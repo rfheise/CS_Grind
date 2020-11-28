@@ -1,8 +1,6 @@
 #ifndef _HASH_H_
 #define _HASH_H_
 #include "Node.h"
-
-
 template <typename T>
 class Hash {
 public:
@@ -18,7 +16,7 @@ public:
     void add(T obj){
         size_t hash = func(obj);
         hash %= len;
-        nodes[hash] = new Node(obj, nodes[hash]);
+        nodes[hash] = new Node<T>(obj, nodes[hash]);
         size++;
     }
     bool check(T obj) {
