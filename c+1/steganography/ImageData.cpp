@@ -33,8 +33,17 @@ ImageData::ImageData(string filename) {
     buffer = new char[buffer_size];
 
 }
+//returns true if big endian else false
+bool endian() {
+    int i = 1;
+    char * temp = (char *)(&i);
+    if (temp[0]) {
+        return false;
+    }
+    return true;
+}
 //adds meta data to bmp
-//rn just adds size of data being stored
+//rn just adds size of data being stored and bool for endianess
 void ImageData::addMetaData(int meta) {
     //copies inital bmp meta data to new bmp
     image.seekg(0, ios::beg);
@@ -46,6 +55,11 @@ void ImageData::addMetaData(int meta) {
         //stores each byte in image
         writeCharacter(temp[i]);
     }
+    //adds endian boolean to file
+    image.read(buffer,1);
+    buffer[0] &= 0xfc;
+    buffer[0] |= endian();
+    out.write(buffer,1);
 }
 void ImageData::writeCharacter(char c) {
     //mask to get last two bits
@@ -75,7 +89,8 @@ void ImageData::encrypt(string message, string outfile) {
     //it from space left
     //since we are storing data in the 2 least significant bits
     //it will take 4 bytes of the image file to store one byte of the data we want to store
-    int allowed = (filesize - 16)/4;
+    //17 is because 2 bits are allocated for boolean of endianess
+    int allowed = (filesize - 17)/4;
     //if size of message is larger than allowed throw an error
     int length = message.size();
     if (length > allowed) {
@@ -119,7 +134,7 @@ void ImageData::encrypt(ifstream &fp, string outfile) {
     //it from space left
     //since we are storing data in the 2 least significant bits
     //it will take 4 bytes of the image file to store one byte of the data we want to store
-    int allowed = (filesize - 16)/4;
+    int allowed = (filesize - 17)/4;
     //gets size of data file
     unsigned int size = getSize(fp);
     //if data file is larger than what you can store throw an error
@@ -172,6 +187,19 @@ int ImageData::readMetaData() {
     //stored bytes
     for (int i = 0; i < 4; i++) {
         meta[i] = readCharacter();
+    }
+    //gets endian of machine
+    bool big = endian();
+    image.read(buffer,1);
+    //gets endian of file
+    bool data_big = buffer[0] & 1;
+    //if endians do not match flip integer
+    if (big != data_big) {
+        for (int i = 0; i < 2; i++) {
+            char temp = meta[i];
+            meta[i] = meta[3 - i];
+            meta[3 - i] = temp;
+        }
     }
     //casts 4 byte array to integer
     return *((int *)(meta));

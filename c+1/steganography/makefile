@@ -1,6 +1,6 @@
 CC=g++
 APPS=encrypt decrypt
-Flags=-Wall -std=c++17
+Flags=-Wall -std=c++11
 all:$(APPS)
 
 encrypt:ImageData.o encrypt.o
