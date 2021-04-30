@@ -5,7 +5,7 @@
 #include <iostream>
 
 using namespace std;
-
+const int standard = 1000000;
 
 template <typename T>
 class Hash {
@@ -14,7 +14,6 @@ private:
     Node<T> **nodes;
     int (*hash)(T obj);
     int arrsize;
-    static int constexpr const standard = 1000000;
 public:
     Hash(int (*hash)(T obj), int arrsize = standard)
         :hash(hash),arrsize(arrsize),size(0){

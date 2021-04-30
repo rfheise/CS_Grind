@@ -4,7 +4,6 @@
 #include <cstdint>
 #include <fstream>
 using namespace std;
-typedef uint8_t byte;
 
 class ImageData {
     private:
@@ -40,12 +39,6 @@ class ImageData {
         void encrypt(ifstream &fp, string outfile);
         //destructor
         ~ImageData();
-};
-
-struct RGB {
-    byte red;
-    byte blue;
-    byte green;
 };
 
 

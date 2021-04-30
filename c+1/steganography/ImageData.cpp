@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstdint>
 using namespace std;
-typedef uint8_t byte;
 
 ImageData::ImageData(string filename) {
     //open image for binary file io
