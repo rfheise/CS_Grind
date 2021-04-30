@@ -14,7 +14,7 @@ int main(void) {
         //makes sure file can open properly
         ImageData x(filename);
         //gets output file name
-        cout << "entername of out file" << endl;
+        cout << "enter name of out file" << endl;
         string outfile;
         cin >> outfile;
         //asks if they want to encrypt a file or text
