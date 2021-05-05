@@ -239,7 +239,16 @@ const char * ImageData::decrypt_string() {
     for (int i = 0; i < length; i++) {
         buff << readCharacter();
     }
-    return buff.str().c_str();
+    //fix string stream stuff later but this should word
+    //for now
+    string x = buff.str();
+    int len = x.size();
+    char *arr = new char[len + 1];
+    for (int i = 0; i < len; i++) {
+        arr[i] = x[i];
+    }
+    arr[len] = '\0';
+    return arr;
 }
 //image reader deconstructor
 ImageData::~ImageData() {
