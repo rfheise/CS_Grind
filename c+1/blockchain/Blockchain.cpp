@@ -30,7 +30,7 @@ void Blockchain::addBlock(string &data) {
     //create a new block to add
     arr[size] = new Block(prevHash, data);
     arr[size] -> mine();
-    cout << "Block mined successfully" << endl;
+    cout << "Block #"<< size + 1 << " mined successfully" << endl;
     cout << *arr[size];
     cout << "Blockchain still valid: " << (isValid() ? "true" : "false") << endl << endl;
     size++;

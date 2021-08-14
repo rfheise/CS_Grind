@@ -13,7 +13,7 @@ bool Block::isValid() const{
 }
 //determines if a hash is valid
 bool Block::isValid(const BYTE *hash) {
-    // return !hash[0] && !hash[1];
+    return !hash[0] && !hash[1];
     return !hash[0];
     // return !hash[0] && !hash[1] && !(hash[2] & 240);
 }
