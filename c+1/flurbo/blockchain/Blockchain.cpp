@@ -3,6 +3,7 @@
 #include "Block.h"
 #include "Hash.h"
 #include "../mempool/Mempool.h"
+#include "../transaction/User.h"
 class Blockchain {
 private:
     //pointer to root node
@@ -13,6 +14,8 @@ private:
     int size;
     //chain mempool
     Mempool pool;
+    //blockchain "miner"
+    User user;
 public:
     //chain constructor
     Blockchain();
