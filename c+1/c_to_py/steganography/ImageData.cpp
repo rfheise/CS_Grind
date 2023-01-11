@@ -182,7 +182,7 @@ char ImageData::readCharacter() {
     return x;
 }
 //reads meta data
-int ImageData::readMetaData() {
+unsigned int ImageData::readMetaData() {
     char meta[4];
     //reads in meta data by reading in first 4
     //stored bytes
@@ -203,15 +203,24 @@ int ImageData::readMetaData() {
         }
     }
     //casts 4 byte array to integer
-    return *((int *)(meta));
+    unsigned int size = *((int *)(meta));
+    cout << size << endl;
+    //determine if size of meta data is larger than useable filesize
+    //if so throw an error
+    //17 is for bytes used in meta data
+    if (size > (unsigned int)(filesize - 17)) {
+        cout << "Corrupted File" << endl;
+        throw 4;
+    }
+    return size;
 
 }
 //decrypts data from image
 void ImageData::decrypt() {
     //reads metadata
-    int length = readMetaData();
+    unsigned int length = readMetaData();
     //displayes each decrypted character
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         cout << readCharacter();
     }
     cout << endl;
@@ -225,18 +234,18 @@ void ImageData::decrypt(string filename) {
         throw 3;
     }
     //reads in length of data
-    int length = readMetaData();
+    unsigned int length = readMetaData();
     //writes each decrypted character to file
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         out << readCharacter();
     }
 }
 const char * ImageData::decrypt_string() {
     //reads in length of data
-    int length = readMetaData();
+    unsigned int length = readMetaData();
     stringstream buff("");
     //writes each decrypted character to file
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         buff << readCharacter();
     }
     //fix string stream stuff later but this should word

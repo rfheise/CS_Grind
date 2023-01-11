@@ -23,7 +23,7 @@ class ImageData {
         //method for writing encrypted characters to bmp
         void writeCharacter(char c);
         //method for reading in meta data from encrypted bmp
-        int readMetaData();
+        unsigned int readMetaData();
         //size of bmp 2nd chunk of meta data
         int head_size;
     public:
